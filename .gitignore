@@ -1,0 +1,3 @@
+/grafana-storage/*
+!/grafana-storage/.gitkeep
+*.swp
