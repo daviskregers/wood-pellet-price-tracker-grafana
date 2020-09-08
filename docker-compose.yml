@@ -1,14 +1,5 @@
 version: '3'
 services:
-  prometheus:
-    image: prom/prometheus
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    restart: always
-    ports:
-        - "9090:9090"
-    networks:
-      metrics-net:
   grafana:
     image: grafana/grafana
     volumes:
@@ -18,5 +9,19 @@ services:
         - "3000:3000"
     networks:
       metrics-net:
+  influxdb:
+    image: influxdb
+    container_name: influxdb
+    restart: always
+    ports:
+        - "8086:8086"
+    networks:
+        - metrics-net
+    volumes:
+        - ./influxdb-storage:/vol01/Docker/monitoring
+    environment:
+        - INFLUXDB_DB=pellets
+        - INFLUXDB_USER=admin
+        - INFLUXDB_ADMIN_ENABLED=true
 networks:
   metrics-net:
