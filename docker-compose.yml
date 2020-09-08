@@ -23,5 +23,21 @@ services:
         - INFLUXDB_DB=pellets
         - INFLUXDB_USER=admin
         - INFLUXDB_ADMIN_ENABLED=true
+  crawler:
+    build:
+      dockerfile: Dockerfile
+      context: ./crawler
+    depends_on:
+      - influxdb
+    networks:
+        - metrics-net
+    volumes:
+      - ./crawler:/app
+    environment:
+      - INFLUXDB_HOST=influxdb
+      - INFLUXDB_PORT=8086
+      - INFLUXDB_DB=pellets
+      - INFLUXDB_USER=admin
+      - INFLUXDB_PASS=
 networks:
   metrics-net:

@@ -1,0 +1,4 @@
+influxdb
+requests
+BeautifulSoup4
+schedule
