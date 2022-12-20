@@ -1,43 +1,18 @@
 # Wood pellet price tracker on Grafana
 
-Previously had made a project for crawling pellet prices here https://github.com/daviskregers/wood-pellet-price-tracker
-I wanted to do all sorts of improvements to it, but then realized that most of them can be implemented by just switching to grafana.
+Previously had made a project for crawling pellet prices [here](https://github.com/daviskregers/wood-pellet-price-tracker).
+I wanted to do all sorts of improvements to it, but then realized that most of
+them can be implemented by just switching to grafana.
 
 ![screenshot](./screenshots/1.png)
 
-## TODO:
+## Setting up
 
-- [x] Setup dockerized grafana and influxdb
-- [x] Import historical data
-- [ ] Setup crawler w/ influxdb
+1. Run `docker compose up`
+2. Open up grafana and add a source that links to influxdb
+    - By default its port 8086
+    - database: pellets
+    - username: admin
+    - password: (empty)
+3. Create a dashboard using the datasource (you can use the [this](https://github.com/daviskregers/wood-pellet-price-tracker-grafana/blob/master/grafana-model.json))
 
-## Setting up grafana
-
-Setup data source:
-
-![data source](screenshots/db_source.png)
-
-Create a new dashboard and panel setup query:
-
-![query](screenshots/query.png)
-
-## Migrate data from old PostgreSQL
-
-To migrate from postgresql to influxdb, run following:
-
-```
-sudo pacman -S postgresql python-influxdb
-pip install psycopg2 python-dotenv
-```
-
-Setup the .env file:
-
-```
-cp .env.example
-vim .env
-```
-
-Run the migration:
-```
-python migrate.py
-```
