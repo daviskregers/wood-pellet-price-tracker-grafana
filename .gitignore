@@ -1,3 +1,4 @@
+/influxdb-storage/*
 /grafana-storage/*
 !/grafana-storage/.gitkeep
 *.swp
