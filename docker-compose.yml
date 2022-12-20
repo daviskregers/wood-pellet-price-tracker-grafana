@@ -18,7 +18,7 @@ services:
     networks:
         - metrics-net
     volumes:
-        - ./influxdb-storage:/vol01/Docker/monitoring
+        - ./influxdb-storage:/var/lib/influxdb
         - ./influxdb-backup:/backup
     environment:
         - INFLUXDB_DB=pellets
