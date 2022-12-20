@@ -110,8 +110,8 @@ def crawl():
         print(error)
 
 schedule.every(12).hours.do(crawl)
+print("Waiting for next scheduled iteration!")
 
 while True:
-    print("Waiting for next scheduled iteration!")
     schedule.run_pending()
     time.sleep(1)
