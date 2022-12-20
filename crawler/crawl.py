@@ -51,7 +51,13 @@ def crawl_page(url, urls_parsed = None):
             # pprint([item, title_column, price_column])
             continue
 
-        price = float(price.replace(",", "").replace(" ", "").replace("€/t.", ""))
+        try:
+            price_string = price.replace(",", "").replace(" ", "").replace("€/t.", "")
+            price = float(price_string)
+        except:
+            print("Error while trying to parse price from string: %s" % (price_string))
+            continue
+
 
         items.append({
             "title": title,
@@ -103,7 +109,7 @@ def crawl():
     except (Exception) as error:
         print(error)
 
-schedule.every(4).hours.do(crawl)
+schedule.every(12).hours.do(crawl)
 
 while True:
     schedule.run_pending()
