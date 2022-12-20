@@ -109,8 +109,8 @@ def crawl():
     except (Exception) as error:
         print(error)
 
-schedule.every(12).hours.do(crawl)
 print("Waiting for next scheduled iteration!")
+schedule.every(12).hours.do(crawl)
 
 while True:
     schedule.run_pending()
